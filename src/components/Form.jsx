@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Form({
     fullName,
@@ -14,87 +15,96 @@ export default function Form({
     refreshCaptcha
 }) {
     return (
-        <div className="flex-1 p-4">
-            <div className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
-                <h2 className="text-xl font-bold text-center text-blue-900 mb-6">
-                    Vishal Mega Mart Guard Entrance Examination 2025
-                </h2>
+        <div className="container-fluid py-4">
+            <div className="row justify-content-center">
+                <div className="col-12 col-md-8 col-lg-6">
+                    <div className="card shadow">
+                        <div className="card-body p-4">
+                            <h2 className="text-center text-primary mb-4">
+                                Vishal Mega Mart Guard Entrance Examination 2025
+                            </h2>
 
-                {message && (
-                    <div className="bg-red-100 text-red-700 p-2 mb-4 rounded">
-                        {message}
-                    </div>
-                )}
-
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-6">
-                        <label className="block mb-1 font-bold">
-                            Enter your Full Name
-                            <div className="text-red-600 text-sm font-normal">(as given on your admit card)</div>
-                        </label>
-                        <input
-                            type="text"
-                            value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
-                            className="w-full border border-gray-300 p-2 rounded"
-                        />
-                    </div>
-
-                    <div className="mb-6">
-                        <label className="block mb-1 font-bold">Enter Date of Birth</label>
-                        <input
-                            type="date"
-                            value={dob}
-                            onChange={(e) => setDob(e.target.value)}
-                            className="w-full border border-gray-300 p-2 rounded"
-                            placeholder="(DD/MM/YYYY)"
-                        />
-                    </div>
-
-                    <div className="mb-6">
-                        <label className="block mb-1 font-bold text-sm sm:text-base">Enter CAPTCHA</label>
-                        <div className="flex flex-col sm:flex-row gap-2">
-                            {/* CAPTCHA Display and Refresh */}
-                            <div className="flex items-center gap-2">
-                                <div className="bg-gray-200 p-1 sm:p-2 rounded text-sm sm:text-base min-w-[100px] sm:min-w-[120px] text-center flex-shrink-0">
-                                    {captcha}
+                            {message && (
+                                <div className="alert alert-danger mb-4">
+                                    {message}
                                 </div>
-                                <button
-                                    type="button"
-                                    onClick={refreshCaptcha}
-                                    className="bg-gray-300 px-2 sm:px-4 py-1 sm:py-2 rounded text-sm sm:text-base whitespace-nowrap"
-                                >
-                                    Refresh
-                                </button>
-                            </div>
+                            )}
 
-                            {/* Input Field */}
-                            <input
-                                type="text"
-                                value={userCaptcha}
-                                onChange={(e) => setUserCaptcha(e.target.value)}
-                                className="w-full border border-gray-300 p-1 sm:p-2 rounded text-sm sm:text-base"
-                                placeholder="Type CAPTCHA"
-                            />
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-4">
+                                    <label className="form-label fw-bold">
+                                        Enter your Full Name
+                                        <small className="text-danger d-block">(as given on your admit card)</small>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={fullName}
+                                        onChange={(e) => setFullName(e.target.value)}
+                                        className="form-control"
+                                    />
+                                </div>
+
+                                <div className="mb-4">
+                                    <label className="form-label fw-bold">Enter Date of Birth</label>
+                                    <input
+                                        type="date"
+                                        value={dob}
+                                        onChange={(e) => setDob(e.target.value)}
+                                        className="form-control"
+                                        placeholder="DD/MM/YYYY"
+                                    />
+                                </div>
+
+                                <div className="mb-4">
+                                    <label className="form-label fw-bold">Enter CAPTCHA</label>
+                                    <div className="row g-2 align-items-center">
+                                        <div className="col-12 col-sm-5 mb-2 mb-sm-0">
+                                            <div className="d-flex align-items-center">
+                                                <div className="bg-light p-2 rounded text-center flex-grow-1 me-2">
+                                                    <strong>{captcha}</strong>
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    onClick={refreshCaptcha}
+                                                    className="btn btn-secondary"
+                                                >
+                                                    Refresh
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-sm-7">
+                                            <input
+                                                type="text"
+                                                value={userCaptcha}
+                                                onChange={(e) => setUserCaptcha(e.target.value)}
+                                                className="form-control"
+                                                placeholder="Type CAPTCHA"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="d-flex justify-content-center gap-3">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary px-3 px-sm-5 py-1 py-sm-2"
+                                        style={{ fontSize: '0.875rem' }}
+                                    >
+                                        Submit
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={handleReset}
+                                        className="btn btn-outline-secondary px-3 px-sm-5 py-1 py-sm-2"
+                                        style={{ fontSize: '0.875rem' }}
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-
-                    <div className="flex justify-center space-x-4">
-                        <button
-                            type="submit"
-                            className="bg-blue-700 text-white px-8 py-2 rounded hover:bg-blue-800"
-                        >
-                            Submit
-                        </button>
-                        <button
-                            type="button"
-                            onClick={handleReset}
-                            className="bg-gray-500 text-white px-8 py-2 rounded hover:bg-gray-600"
-                        >
-                            Reset
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     );

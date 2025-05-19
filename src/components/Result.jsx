@@ -2,37 +2,28 @@ import React from 'react';
 
 export default function Result({ examData, handleBack }) {
   return (
-    <div className="flex-1 p-2 sm:p-4">
-      <div className="max-w-2xl mx-auto bg-white pb-4 sm:pb-6 rounded-md shadow-md">
-        {/* Button Group */}
-        <div className="bg-blue-900 text-white p-2 flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-4">
-          <button className="bg-blue-700 px-3 sm:px-4 py-1.5 sm:py-1 rounded text-sm sm:text-base">
-            Print
-          </button>
-          <button 
-            className="bg-blue-700 px-3 sm:px-4 py-1.5 sm:py-1 rounded text-sm sm:text-base"
-            onClick={handleBack}
-          >
-            Back
-          </button>
+    <div className="container-fluid p-3 p-md-4">
+      <div className="card mx-auto shadow" style={{ maxWidth: '800px' }}>
+        <div className="card-header bg-primary text-white p-2">
+       
         </div>
 
-        <div className="px-2 sm:px-4">
+        <div className="card-body p-2 p-md-3">
           {/* Candidate Info Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse mb-4 min-w-[300px]">
+          <div className="table-responsive mb-3">
+            <table className="table table-bordered">
               <tbody>
                 <tr>
-                  <td className="border border-gray-300 p-1.5 sm:p-2 font-bold text-sm sm:text-base w-1/3">Roll No:</td>
-                  <td className="border border-gray-300 p-1.5 sm:p-2 text-sm sm:text-base">{examData.rollNumber}</td>
+                  <th className="w-25 bg-light">Roll No:</th>
+                  <td>{examData.rollNumber}</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-1.5 sm:p-2 font-bold text-sm sm:text-base">Candidate Name:</td>
-                  <td className="border border-gray-300 p-1.5 sm:p-2 text-sm sm:text-base">{examData.candidateName}</td>
+                  <th className="bg-light">Candidate Name:</th>
+                  <td>{examData.candidateName}</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-1.5 sm:p-2 font-bold text-sm sm:text-base">Date of Birth:</td>
-                  <td className="border border-gray-300 p-1.5 sm:p-2 text-sm sm:text-base">
+                  <th className="bg-light">Date of Birth:</th>
+                  <td>
                     {new Date(examData.dateOfBirth).toLocaleDateString('en-GB', {
                       day: '2-digit',
                       month: '2-digit',
@@ -41,35 +32,35 @@ export default function Result({ examData, handleBack }) {
                   </td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-1.5 sm:p-2 font-bold text-sm sm:text-base">Admit Card ID:</td>
-                  <td className="border border-gray-300 p-1.5 sm:p-2 text-sm sm:text-base">{examData.admitCardId}</td>
+                  <th className="bg-light">Admit Card ID:</th>
+                  <td>{examData.admitCardId}</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           {/* Main Subjects Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse mb-4 min-w-[600px] sm:min-w-full">
-              <thead className="bg-blue-900 text-white">
+          <div className="table-responsive mb-3">
+            <table className="table table-bordered table-striped">
+              <thead className="table-primary">
                 <tr>
-                  <th className="border border-gray-300 p-1.5 sm:p-2 text-xs sm:text-sm">SUB CODE</th>
-                  <th className="border border-gray-300 p-1.5 sm:p-2 text-xs sm:text-sm">SUB NAME</th>
-                  <th className="border border-gray-300 p-1.5 sm:p-2 text-xs sm:text-sm">THEORY (80)</th>
-                  <th className="border border-gray-300 p-1.5 sm:p-2 text-xs sm:text-sm">PRACTICAL (20)</th>
-                  <th className="border border-gray-300 p-1.5 sm:p-2 text-xs sm:text-sm">TOTAL</th>
-                  <th className="border border-gray-300 p-1.5 sm:p-2 text-xs sm:text-sm">GRADE</th>
+                  <th>SUB CODE</th>
+                  <th>SUB NAME</th>
+                  <th>THEORY (80)</th>
+                  <th>PRACTICAL (20)</th>
+                  <th>TOTAL</th>
+                  <th>GRADE</th>
                 </tr>
               </thead>
               <tbody>
                 {examData.subjects && examData.subjects.filter(s => !s.additional).map((subject, index) => (
                   <tr key={index}>
-                    <td className="border border-gray-300 p-1.5 sm:p-2 text-center text-sm sm:text-base">{subject.code}</td>
-                    <td className="border border-gray-300 p-1.5 sm:p-2 text-sm sm:text-base">{subject.name}</td>
-                    <td className="border border-gray-300 p-1.5 sm:p-2 text-center text-sm sm:text-base">{subject.theory}</td>
-                    <td className="border border-gray-300 p-1.5 sm:p-2 text-center text-sm sm:text-base">{subject.practical}</td>
-                    <td className="border border-gray-300 p-1.5 sm:p-2 text-center font-bold text-sm sm:text-base">{subject.total}</td>
-                    <td className="border border-gray-300 p-1.5 sm:p-2 text-center font-bold text-sm sm:text-base">{subject.grade}</td>
+                    <td className="text-center">{subject.code}</td>
+                    <td>{subject.name}</td>
+                    <td className="text-center">{subject.theory}</td>
+                    <td className="text-center">{subject.practical}</td>
+                    <td className="text-center fw-bold">{subject.total}</td>
+                    <td className="text-center fw-bold">{subject.grade}</td>
                   </tr>
                 ))}
               </tbody>
@@ -77,21 +68,21 @@ export default function Result({ examData, handleBack }) {
           </div>
 
           {/* Additional Subject */}
-          <div className="w-full text-center bg-gray-200 p-2 font-bold mb-4 text-sm sm:text-base">
+          <h5 className="text-center bg-secondary text-white p-2 mb-3">
             ADDITIONAL SUBJECT
-          </div>
+          </h5>
 
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse mb-6 min-w-[600px] sm:min-w-full">
+          <div className="table-responsive mb-4">
+            <table className="table table-bordered table-striped">
               <tbody>
                 {examData.subjects && examData.subjects.filter(s => s.additional).map((subject, index) => (
                   <tr key={index}>
-                    <td className="border border-gray-300 p-1.5 sm:p-2 text-center text-sm sm:text-base">{subject.code}</td>
-                    <td className="border border-gray-300 p-1.5 sm:p-2 text-sm sm:text-base">{subject.name}</td>
-                    <td className="border border-gray-300 p-1.5 sm:p-2 text-center text-sm sm:text-base">{subject.theory}</td>
-                    <td className="border border-gray-300 p-1.5 sm:p-2 text-center text-sm sm:text-base">{subject.practical}</td>
-                    <td className="border border-gray-300 p-1.5 sm:p-2 text-center font-bold text-sm sm:text-base">{subject.total}</td>
-                    <td className="border border-gray-300 p-1.5 sm:p-2 text-center font-bold text-sm sm:text-base">{subject.grade}</td>
+                    <td className="text-center">{subject.code}</td>
+                    <td>{subject.name}</td>
+                    <td className="text-center">{subject.theory}</td>
+                    <td className="text-center">{subject.practical}</td>
+                    <td className="text-center fw-bold">{subject.total}</td>
+                    <td className="text-center fw-bold">{subject.grade}</td>
                   </tr>
                 ))}
               </tbody>
@@ -99,16 +90,16 @@ export default function Result({ examData, handleBack }) {
           </div>
 
           {/* Results Section */}
-          <div className="w-full bg-green-100 text-green-700 p-2 sm:p-4 text-center text-xl sm:text-3xl font-bold mb-4">
+          <div className="alert alert-success text-center fs-4 fw-bold mb-3">
             SELECTED
           </div>
 
-          <div className="text-center mb-4 text-sm sm:text-base">
-            Total Marks: {examData.totalMarks} | Percentage: {examData.percentage}%
+          <div className="text-center mb-2">
+            <strong>Total Marks:</strong> {examData.totalMarks} | <strong>Percentage:</strong> {examData.percentage}%
           </div>
 
-          <div className="text-center mb-4 text-sm sm:text-base">
-            Cutoff Percentage: {examData.cutoffPercentage}%
+          <div className="text-center mb-3">
+            <strong>Cutoff Percentage:</strong> {examData.cutoffPercentage}%
           </div>
         </div>
       </div>

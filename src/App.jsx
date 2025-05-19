@@ -8,6 +8,7 @@ import {
   generateRandomGrade,
   generateRandomScore 
 } from './utils/helpers';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
   const [page, setPage] = useState('form');
@@ -21,7 +22,8 @@ export default function App() {
 
   useEffect(() => {
     setCaptcha(generateRandomCaptcha());
-setResultsMarquee("Results are out ! ! ! 🎉 🥳                                 Check your results ! ! ! 🥳 🎉                             Results are out ! ! ! 🎉 🥳                         Check your results ! ! ! 🥳 🎉");  }, []);
+    setResultsMarquee("Results are out ! ! ! 🎉 🥳      Check your results ! ! ! 🥳 🎉       Results are out ! ! ! 🎉 🥳        Check your results ! ! ! 🥳 🎉");
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,59 +94,68 @@ setResultsMarquee("Results are out ! ! ! 🎉 🥳                              
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
-      
-      <div className="bg-red-800 text-white py-4 px-2 text-center">
-        <h1 className="text-2xl font-bold">CIRCUIT BOARD OF SYSTEM ELECTRONICS</h1>
-        {page === 'form' && (
-          <div className="text-xl mt-2">Examination Results 2025</div>
-        )}
-        {page === 'result' && (
-          <div className="text-xl mt-2">Vishal Mega Mart Guard Entrance Examination 2025</div>
-        )}
-        <div className="text-sm mt-2"></div>
+    <div className="d-flex flex-column min-vh-100">
+      {/* Header */}
+      <div className="bg-danger text-white py-4 text-center">
+        <div className="container">
+          <h1 className="display-5 fw-bold">CIRCUIT BOARD OF SYSTEM ELECTRONICS</h1>
+          {page === 'form' && (
+            <div className="h4 mt-2">Examination Results 2025</div>
+          )}
+          {page === 'result' && (
+            <div className="h4 mt-2">Vishal Mega Mart Guard Entrance Examination 2025</div>
+          )}
+        </div>
       </div>
-      
-      <div className="bg-blue-900 text-white p-2 overflow-hidden">
-        <div className="whitespace-nowrap animate-marquee">
+
+      {/* Marquee */}
+      <div className="bg-primary text-white p-2 overflow-hidden">
+        <div className="animate-marquee text-nowrap" style={{ whiteSpace: 'pre' }}>
           {resultsMarquee}
         </div>
       </div>
-      
-      {page === 'form' && (
-        <Form
-          fullName={fullName}
-          setFullName={setFullName}
-          dob={dob}
-          setDob={setDob}
-          captcha={captcha}
-          userCaptcha={userCaptcha}
-          setUserCaptcha={setUserCaptcha}
-          message={message}
-          handleSubmit={handleSubmit}
-          handleReset={handleReset}
-          refreshCaptcha={refreshCaptcha}
-        />
-      )}
-      
-      {page === 'result' && (
-        <Result examData={examData} handleBack={handleBack} />
-      )}
-      
-      <div className="p-3 text-center text-gray-600 text-sm">
-        2025 Circuit Board of System Electronics. All Rights Reserved.
-      </div>
-      
+
+      {/* Main Content */}
+      <main className="flex-grow-1 py-4">
+        <div className="container">
+          {page === 'form' && (
+            <Form
+              fullName={fullName}
+              setFullName={setFullName}
+              dob={dob}
+              setDob={setDob}
+              captcha={captcha}
+              userCaptcha={userCaptcha}
+              setUserCaptcha={setUserCaptcha}
+              message={message}
+              handleSubmit={handleSubmit}
+              handleReset={handleReset}
+              refreshCaptcha={refreshCaptcha}
+            />
+          )}
+          
+          {page === 'result' && (
+            <Result examData={examData} handleBack={handleBack} />
+          )}
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-light py-3 mt-auto">
+        <div className="container text-center text-muted small">
+          2025 Circuit Board of System Electronics. All Rights Reserved.
+        </div>
+      </footer>
+
       <style jsx>{`
         @keyframes marquee {
           0% { transform: translateX(100%); }
           100% { transform: translateX(-100%); }
         }
         .animate-marquee {
-          display: inline-block;
-              white-space: pre;
-
           animation: marquee 15s linear infinite;
+          display: inline-block;
+          padding-left: 100%; /* Add initial offset */
         }
       `}</style>
     </div>
